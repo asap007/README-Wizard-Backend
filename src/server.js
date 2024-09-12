@@ -17,15 +17,18 @@ app.use(express.static('public'));
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour in milliseconds
-  max: 1, // limit each IP to 10 requests per windowMs
+  max: 1, // limit each IP to 1 request per windowMs
   message: (req, res) => {
     const timeRemaining = Math.ceil((req.rateLimit.resetTime - Date.now()) / 1000 / 60);
     return {
       error: `You've reached your request limit. Please try again in ${timeRemaining} minutes.`
     };
   },
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req) => {
+    return req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  },
 });
 
 // Apply rate limiting to all routes
