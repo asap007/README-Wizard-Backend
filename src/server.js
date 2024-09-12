@@ -7,6 +7,8 @@ const errorHandler = require('./utils/error-handler');
 
 const app = express();
 
+app.set('trust proxy', true);
+
 // Middleware
 app.use(cors());
 app.use(express.json());
