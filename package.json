@@ -1,0 +1,21 @@
+{
+  "name": "github-readme-generator",
+  "version": "1.0.0",
+  "description": "Generate README files for GitHub repositories",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.1.0",
+    "@octokit/rest": "^19.0.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
