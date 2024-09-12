@@ -17,7 +17,7 @@ app.use(express.static('public'));
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hour in milliseconds
-  max: 1, // limit each IP to 1 request per windowMs
+  max: 10, // limit each IP to 1 request per windowMs
   message: (req, res) => {
     const timeRemaining = Math.ceil((req.rateLimit.resetTime - Date.now()) / 1000 / 60);
     return {
